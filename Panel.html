@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lunar Panel - Kayıt & Giriş</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a001f, #1a0033, #000814);
+      color: #e0f7ff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(15, 15, 35, 0.92);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(0, 180, 255, 0.22);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+      width: 100%;
+      max-width: 420px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #0066cc, #0099ff);
+      padding: 28px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.9rem;
+      letter-spacing: 1px;
+    }
+
+    .tabs {
+      display: flex;
+      background: #0f0f1f;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 16px;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab.active {
+      background: #1a1a3a;
+      color: #00ccff;
+      border-bottom: 3px solid #00ccff;
+    }
+
+    .form-content {
+      padding: 30px 25px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 22px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 14px 14px 48px;
+      border: 1px solid #333366;
+      border-radius: 10px;
+      background: #0d0d22;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #00ccff;
+      box-shadow: 0 0 0 3px rgba(0, 204, 255, 0.18);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8888aa;
+      font-size: 1.1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #00b3ff, #0099ff);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 179, 255, 0.4);
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.92rem;
+      color: #aaccff;
+    }
+
+    .message a {
+      color: #00ccff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .message a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="authContainer">
+
+  <div class="header">
+    <h1>Lunar Panel</h1>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" id="tabLogin" onclick="show('login')">Giriş Yap</div>
+    <div class="tab" id="tabRegister" onclick="show('register')">Kayıt Ol</div>
+  </div>
+
+  <!-- Giriş Formu -->
+  <div id="login" class="form-content">
+    <form id="frmLogin">
+      <div class="form-group">
+        <i class="fas fa-user input-icon"></i>
+        <input type="text" id="loginUser" placeholder="Kullanıcı Adı" required autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" id="loginPass" placeholder="Şifre" required autocomplete="off" />
+      </div>
+      <button type="submit">Giriş Yap</button>
+      <div class="message">
+        Hesabın yok mu? <a href="#" onclick="show('register'); return false;">Kayıt Ol</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Kayıt Formu -->
+  <div id="register" class="form-content hidden">
+    <form id="frmRegister">
+      <div class="form-group">
+        <i class="fas fa-user input-icon"></i>
+        <input type="text" id="regUser" placeholder="Kullanıcı Adı" required minlength="3" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-envelope input-icon"></i>
+        <input type="email" id="regEmail" placeholder="E-posta" required autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" id="regPass" placeholder="Şifre" required minlength="6" autocomplete="off" />
+      </div>
+      <button type="submit">Kayıt Ol</button>
+      <div class="message">
+        Zaten hesabın var mı? <a href="#" onclick="show('login'); return false;">Giriş Yap</a>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+// Formlar arası geçiş
+function show(screen) {
+  document.getElementById('login').classList.toggle('hidden', screen !== 'login');
+  document.getElementById('register').classList.toggle('hidden', screen !== 'register');
+
+  document.getElementById('tabLogin').classList.toggle('active', screen === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', screen !== 'login');
+}
+
+// Kayıt ol
+document.getElementById('frmRegister').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const user = document.getElementById('regUser').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value;
+
+  if (user.length < 3) return alert("Kullanıcı adı en az 3 karakter olmalı.");
+  if (!email.includes('@')) return alert("Geçerli bir e-posta gir.");
+  if (pass.length < 6) return alert("Şifre en az 6 karakter olmalı.");
+
+  localStorage.setItem('lunar_user', user);
+  localStorage.setItem('lunar_pass', pass);
+
+  alert("Kayıt başarılı!\nŞimdi giriş yapabilirsin.");
+  show('login');
+  document.getElementById('frmRegister').reset();
+});
+
+// Giriş yap
+document.getElementById('frmLogin').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+
+  const savedUser = localStorage.getItem('lunar_user');
+  const savedPass = localStorage.getItem('lunar_pass');
+
+  if (user === savedUser && pass === savedPass) {
+    localStorage.setItem('lunar_loggedIn', 'true');
+    localStorage.setItem('lunar_currentUser', user);
+
+    // BURASI DEĞİŞTİ → login başarılı olunca messi.html sayfasına atıyor
+    window.location.href = 'http://127.0.0.1:5500/messi.html';
+  } else {
+    alert("Kullanıcı adı veya şifre yanlış!");
+  }
+});
+
+// Sayfa yüklendiğinde eğer zaten giriş yapılmışsa direkt messi.html'ye yönlendir
+window.addEventListener('load', function() {
+  if (localStorage.getItem('lunar_loggedIn') === 'true') {
+    window.location.href = 'http://127.0.0.1:5500/messi.html';
+  }
+});
+</script>
+
+</body>
+</html>
